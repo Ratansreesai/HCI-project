@@ -66,8 +66,8 @@ const user=()=>{try{return JSON.parse(store.get('rr_user'))}catch(e){return null
 $('#confirm').onclick=()=>{
   const u=user();
   if(!u||u.role!=='customer'){
-    store.set('rr_pending',JSON.stringify({...S,addr:$('#addr').value}));
-    location.href='login.html';
+    store.set('rr_pending',JSON.stringify({type:S.type,fuel:S.fuel,prob:S.prob,loc:S.loc,addr:$('#addr').value}));
+    location.href='login.html?next=book';
     return;
   }
   startTracking();
@@ -84,6 +84,7 @@ $('#payb').onclick=()=>{
 $('#again').onclick=()=>{S.prob='';S.loc='';gps=false;$('#addr').value='';$('#locmsg').textContent='';$('#upi').value='';stage=0;show('vehicle')};
 $('#q').oninput=e=>{const q=e.target.value.toLowerCase();$$('.svc').forEach(c=>c.hidden=!c.textContent.toLowerCase().includes(q))};
 $$('.tab').forEach(b=>b.onclick=()=>{const v=b.dataset.t;if(v==='all'){S.type='';S.fuel=''}else if(v==='ev')S.fuel='ev';else S.type=v;refresh()});
-let p=null;try{p=JSON.parse(store.get('rr_pending')||'null')}catch(e){}
-if(p&&user()){const {addr,...rest}=p;Object.assign(S,rest);gps=S.loc==='gps';$('#addr').value=addr||'';store.set('rr_pending','');show('price')}
-else show('vehicle');
+let pend=null;try{pend=JSON.parse(store.get('rr_pending')||'null')}catch(e){}
+if(pend&&user()&&user().role==='customer'){
+  const {addr,...rest}=pend;Object.assign(S,rest);gps=S.loc==='gps';$('#addr').value=addr||'';store.set('rr_pending','');show('price');
+}else show('vehicle');
