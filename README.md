@@ -4,7 +4,7 @@ Roadside and repair help for petrol and electric bikes and cars, built as a fron
  
 > Any vehicle, petrol or electric, back on the road at a price you see first.
  
-**Live demo:** `https://<your-username>.github.io/<repo-name>/`
+**Live demo:** `https://ratansreesai.github.io/HCI-project/`
  
 ## About
  
