@@ -62,7 +62,16 @@ $('#gps').onclick=()=>{
   navigator.geolocation.getCurrentPosition(()=>{gps=true;S.loc='gps';msg.className='';msg.textContent=t('locOk');refresh()},fail,{timeout:8000});
 };
 $('#addr').oninput=e=>{const v=e.target.value.trim();S.loc=gps?'gps':(v.length>2?v:'');refresh()};
-$('#confirm').onclick=startTracking;
+const user=()=>{try{return JSON.parse(store.get('rr_user'))}catch(e){return null}};
+$('#confirm').onclick=()=>{
+  const u=user();
+  if(!u||u.role!=='customer'){
+    store.set('rr_pending',JSON.stringify({...S,addr:$('#addr').value}));
+    location.href='login.html';
+    return;
+  }
+  startTracking();
+};
 $('#cancel').onclick=()=>$('#dlg').showModal();
 $('#no').onclick=()=>$('#dlg').close();
 $('#yes').onclick=()=>{$('#dlg').close();clearInterval(timer);stage=0;show('price')};
@@ -75,4 +84,6 @@ $('#payb').onclick=()=>{
 $('#again').onclick=()=>{S.prob='';S.loc='';gps=false;$('#addr').value='';$('#locmsg').textContent='';$('#upi').value='';stage=0;show('vehicle')};
 $('#q').oninput=e=>{const q=e.target.value.toLowerCase();$$('.svc').forEach(c=>c.hidden=!c.textContent.toLowerCase().includes(q))};
 $$('.tab').forEach(b=>b.onclick=()=>{const v=b.dataset.t;if(v==='all'){S.type='';S.fuel=''}else if(v==='ev')S.fuel='ev';else S.type=v;refresh()});
-show('vehicle');
+let p=null;try{p=JSON.parse(store.get('rr_pending')||'null')}catch(e){}
+if(p&&user()){const {addr,...rest}=p;Object.assign(S,rest);gps=S.loc==='gps';$('#addr').value=addr||'';store.set('rr_pending','');show('price')}
+else show('vehicle');
