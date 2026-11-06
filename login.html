@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Login | RideRescue</title><link rel="stylesheet" href="style.css"></head>
+<body><div id="nav"></div>
+<main class="auth"><h1>Login</h1>
+<fieldset><legend>I am a</legend><label class="rd"><input type="radio" name="role" value="customer" checked> Rider / car owner</label><label class="rd"><input type="radio" name="role" value="mechanic"> Mechanic</label></fieldset>
+<label for="ph">Mobile number</label><input id="ph" inputmode="numeric" maxlength="10" autocomplete="tel" placeholder="10-digit number">
+<label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password">
+<label class="rd"><input type="checkbox" id="show"> Show password</label>
+<p id="err" role="alert" class="err"></p>
+<button id="go" class="btn">Login</button>
+<p class="note">Demo: use any 10-digit number and a password of 4 or more characters.</p></main>
+<script src="nav.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+if(new URLSearchParams(location.search).get('role')==='mechanic')document.querySelector('[value=mechanic]').checked=true;
+$('#show').onchange=e=>$('#pw').type=e.target.checked?'text':'password';
+$('#go').onclick=()=>{const p=$('#ph').value.trim(),w=$('#pw').value,role=document.querySelector('[name=role]:checked').value;
+ if(!/^[6-9]\d{9}$/.test(p)){$('#err').textContent='Enter a valid 10-digit mobile number starting with 6, 7, 8 or 9.';$('#ph').focus();return}
+ if(w.length<4){$('#err').textContent='Password must have at least 4 characters.';$('#pw').focus();return}
+ try{localStorage.setItem('rr_user',JSON.stringify({role,name:'+91 '+p}))}catch(e){}
+ location.href=role==='mechanic'?'mechanic.html':'index.html'};
+document.addEventListener('keydown',e=>{if(e.key==='Enter')$('#go').click()});
+</script></body></html>

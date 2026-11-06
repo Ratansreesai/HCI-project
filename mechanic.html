@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Mechanic dashboard | RideRescue</title><link rel="stylesheet" href="style.css"></head>
+<body><div id="nav"></div>
+<div class="dash">
+<nav class="side" aria-label="Dashboard"><a href="#ov" aria-current="page">Overview</a><a href="#rq">Requests</a><a href="#job">Active job</a><a href="#er">Earnings</a></nav>
+<main>
+<div class="row"><h1 id="ov">Mechanic dashboard</h1><label class="rd"><input type="checkbox" id="online" checked> Online</label></div>
+<div class="stats"><div class="card"><span class="note">Earned today</span><b id="sEarn">₹0</b></div><div class="card"><span class="note">Jobs done</span><b id="sJobs">0</b></div><div class="card"><span class="note">Rating</span><b>★ 4.8</b></div></div>
+<h2 id="rq">Incoming requests</h2><p id="msg" role="status" class="err"></p>
+<div class="scroll"><table><thead><tr><th>Customer</th><th>Vehicle</th><th>Issue</th><th>Distance</th><th>Fare</th><th>You earn</th><th></th></tr></thead><tbody id="reqs"></tbody></table></div>
+<h2 id="job">Active job</h2><div id="active" class="card"></div>
+<h2 id="er">Earnings this week</h2><div class="card"><div class="bars" id="bars"></div><p class="note">You keep 82% of each fare. RideRescue commission is 18%.</p></div>
+</main></div>
+<script src="nav.js"></script><script src="mechanic.js"></script></body></html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>RideRescue</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div id="nav"></div>
+<div class="bar"><div class="tabs" role="group">
+<button class="tab" data-t="all" data-i="all"></button><button class="tab" data-t="bike">🏍️ <span data-i="bike"></span></button><button class="tab" data-t="car">🚗 <span data-i="car"></span></button><button class="tab" data-t="ev">🔋 <span data-i="ev"></span></button></div>
+<input id="q" type="search" aria-label="Search"><select id="lang" aria-label="Language"><option value="en">English</option><option value="te">తెలుగు</option><option value="hi">हिन्दी</option></select></div>
+<div class="wrap">
+<main class="left">
+<section class="hero"><h1 data-i="tag"></h1><p class="note" data-i="demo"></p></section>
+<h2 data-i="svcT"></h2>
+<div id="svcs">
+<div class="svc"><span class="ic">🛞</span><div><b data-i="puncture"></b><br><span class="note"><span data-i="from"></span> ₹300</span></div><button class="btn sm" data-p="puncture" data-i="book"></button></div>
+<div class="svc"><span class="ic">⚡</span><div><b data-i="jump"></b><br><span class="note"><span data-i="from"></span> ₹350</span></div><button class="btn sm" data-p="jump" data-i="book"></button></div>
+<div class="svc"><span class="ic">🚛</span><div><b data-i="tow"></b><br><span class="note"><span data-i="from"></span> ₹600</span></div><button class="btn sm" data-p="tow" data-i="book"></button></div>
+<div class="svc"><span class="ic">🔌</span><div><b data-i="batt"></b><br><span class="note"><span data-i="from"></span> ₹450</span></div><button class="btn sm" data-p="batt" data-i="book"></button></div>
+<div class="svc"><span class="ic">🔧</span><div><b data-i="other"></b><br><span class="note"><span data-i="from"></span> ₹400</span></div><button class="btn sm" data-p="other" data-i="book"></button></div>
+</div></main>
+<aside id="panel">
+<div class="prog" hidden><button id="back" class="link" data-i="back"></button> <span id="step"></span><div class="track"><i id="bar"></i></div></div>
+<section id="s-vehicle"><h2 data-i="vehQ"></h2><div class="grid2" role="group">
+<button class="ch" data-g="type" data-v="bike"><span>🏍️</span><b data-i="bike"></b></button><button class="ch" data-g="type" data-v="car"><span>🚗</span><b data-i="car"></b></button>
+<button class="ch" data-g="fuel" data-v="petrol"><span>⛽</span><b data-i="petrol"></b></button><button class="ch" data-g="fuel" data-v="ev"><span>🔋</span><b data-i="ev"></b></button></div>
+<button class="btn next" data-go="problem" data-i="cont"></button></section>
+<section id="s-problem" hidden><h2 data-i="probQ"></h2><div class="grid2" role="group">
+<button class="ch" data-g="prob" data-v="puncture"><span>🛞</span><b data-i="puncture"></b></button><button class="ch" data-g="prob" data-v="jump"><span>⚡</span><b data-i="jump"></b></button>
+<button class="ch" data-g="prob" data-v="tow"><span>🚛</span><b data-i="tow"></b></button><button class="ch" data-g="prob" data-v="batt"><span>🔌</span><b data-i="batt"></b></button>
+<button class="ch" data-g="prob" data-v="other"><span>🔧</span><b data-i="other"></b></button></div>
+<button class="btn next" data-go="loc" data-i="cont"></button></section>
+<section id="s-loc" hidden><h2 data-i="locQ"></h2><button id="gps" class="btn alt" data-i="useLoc"></button><p id="locmsg" role="status"></p>
+<label for="addr" data-i="addr"></label><input id="addr" autocomplete="street-address"><button class="btn next" data-go="price" data-i="cont"></button></section>
+<section id="s-price" hidden><h2 data-i="priceQ"></h2><div id="pricebox" class="card"></div><p class="note" data-i="pricenote"></p><button id="confirm" class="btn" data-i="confirm"></button></section>
+<section id="s-status" hidden><h2 data-i="stTitle"></h2><ol id="tl" aria-live="polite"></ol><p id="eta" class="eta" role="status"></p><div id="mech" class="card" hidden></div>
+<button id="toPay" class="btn" hidden data-i="payQ"></button><button id="cancel" class="btn alt" data-i="cancel"></button></section>
+<section id="s-pay" hidden><h2 data-i="payQ"></h2><p class="total" id="payAmt"></p><label for="upi" data-i="upiLabel"></label><input id="upi" placeholder="name@upi" autocomplete="off"><p id="upiErr" role="alert" class="err"></p><button id="payb" class="btn" data-i="payBtn"></button></section>
+<section id="s-done" hidden><h2 data-i="paid"></h2><div id="receipt" class="card"></div><button id="again" class="btn" data-i="newReq"></button></section>
+</aside></div>
+<dialog id="dlg"><p data-i="cancelAsk"></p><button id="yes" class="btn alt" data-i="yes"></button><button id="no" class="btn" data-i="no"></button></dialog>
+<script src="nav.js"></script><script src="app.js"></script></body></html>
